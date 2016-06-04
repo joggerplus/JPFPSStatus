@@ -25,8 +25,18 @@
     [displayLink removeFromRunLoop:[NSRunLoop currentRunLoop] forMode:NSRunLoopCommonModes];
 }
 
++ (JPFPSStatus *)sharedInstance {
+    static JPFPSStatus *sharedInstance;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        sharedInstance = [[JPFPSStatus alloc] init];
+    });
+    return sharedInstance;
+}
+
 - (id)init {
-    if( self = [super init ]){
+    self = [super init];
+    if (self) {
         [[NSNotificationCenter defaultCenter] addObserver: self
                                                  selector: @selector(applicationDidBecomeActiveNotification)
                                                      name: UIApplicationDidBecomeActiveNotification
@@ -42,15 +52,14 @@
         [displayLink setPaused:YES];
         [displayLink addToRunLoop:[NSRunLoop currentRunLoop] forMode:NSRunLoopCommonModes];
         
-        CGFloat screenWidth=[[UIScreen mainScreen] bounds].size.width;
-        // Info Layer
-        fpsLabel = [[UILabel alloc] initWithFrame:CGRectMake((screenWidth-50)/2+50, 0, 50, 20)];
+        // fpsLabel
+        fpsLabel = [[UILabel alloc] initWithFrame:CGRectMake(([[UIScreen mainScreen] bounds].size.width-50)/2+50, 0, 50, 20)];
         fpsLabel.font=[UIFont boldSystemFontOfSize:12];
         fpsLabel.textColor=[UIColor colorWithRed:0.33 green:0.84 blue:0.43 alpha:1.00];
         fpsLabel.backgroundColor=[UIColor clearColor];
-        fpsLabel.tag=101;
         fpsLabel.textAlignment=NSTextAlignmentRight;
-        
+        fpsLabel.tag=101;
+
     }
     return self;
 }
@@ -73,8 +82,7 @@
     
 }
 
-- (void)open;
-{
+- (void)open {
     
     NSArray *rootVCViewSubViews=[[UIApplication sharedApplication].delegate window].rootViewController.view.subviews;
     for (UIView *label in rootVCViewSubViews) {
@@ -83,12 +91,10 @@
         }
     }
     
-    [[[UIApplication sharedApplication].delegate window].rootViewController.view addSubview:fpsLabel];
+    [[((NSObject <UIApplicationDelegate> *)([UIApplication sharedApplication].delegate)) window].rootViewController.view addSubview:fpsLabel];
 }
 
-- (void)close;
-{
-    
+- (void)close {
     NSArray *rootVCViewSubViews=[[UIApplication sharedApplication].delegate window].rootViewController.view.subviews;
     for (UIView *label in rootVCViewSubViews) {
         if ([label isKindOfClass:[UILabel class]]&& label.tag==101) {
@@ -99,25 +105,12 @@
     
 }
 
-+ (JPFPSStatus *)sharedInstance;{
-    static JPFPSStatus *sharedInstance;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        sharedInstance = [[JPFPSStatus alloc] init];
-        
-    });
-    return sharedInstance;
-}
-
-
 - (void)applicationDidBecomeActiveNotification {
     [displayLink setPaused:NO];
 }
 
-
 - (void)applicationWillResignActiveNotification {
     [displayLink setPaused:YES];
 }
-
 
 @end
