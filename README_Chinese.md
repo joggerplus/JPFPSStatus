@@ -11,7 +11,7 @@ JPFPSStatus是用来显示FPS状态在iOS状态栏，FPS是一秒钟渲染多少
 
 ```ruby
 platform :ios, '7.0'
-pod 'JPFPSStatus', '~> 0.0.1'
+pod 'JPFPSStatus', '~> 0.0.2'
 ```
 
 
