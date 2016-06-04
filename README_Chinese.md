@@ -40,7 +40,7 @@ pod 'JPFPSStatus', '~> 0.0.1'
 
 JPFPSStatus的显示效果如图：
 
-<img  src="https://raw.githubusercontent.com/joggerplus/JPFPSStatus/master/JPFPSStatus/Resources/jpfpsstatus.png" width="320" height="570">
+<img  src="https://raw.githubusercontent.com/joggerplus/JPFPSStatus/master/JPFPSStatus/Resources/jpfpsstatus1.jpg" width="320" height="570">
 
 
 #### Licenses

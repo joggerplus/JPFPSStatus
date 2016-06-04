@@ -48,7 +48,7 @@ add the code in AppDelegate.m
 
 
 
-<img  src="https://raw.githubusercontent.com/joggerplus/JPFPSStatus/master/JPFPSStatus/Resources/jpfpsstatus.png" width="320" height="570">
+<img  src="https://raw.githubusercontent.com/joggerplus/JPFPSStatus/master/JPFPSStatus/Resources/jpfpsstatus1.jpg" width="320" height="570">
 
 
 #### Licenses
