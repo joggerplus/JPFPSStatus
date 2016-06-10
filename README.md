@@ -18,7 +18,7 @@ Show FPS Status on StatusBar
 
 ```ruby
 platform :ios, '7.0'
-pod 'JPFPSStatus', '~> 0.0.2'
+pod 'JPFPSStatus', '~> 0.1'
 ```
 
 
