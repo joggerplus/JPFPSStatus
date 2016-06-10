@@ -15,6 +15,7 @@
 + (JPFPSStatus *)sharedInstance;
 
 - (void)open;
+- (void)openWithHandler:(void (^)(NSInteger fpsValue))handler;
 - (void)close;
 
 @end
