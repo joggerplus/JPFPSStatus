@@ -30,12 +30,26 @@ pod 'JPFPSStatus', '~> 0.1'
 
 </pre>
 
+
+<pre>
+#if defined(DEBUG)||defined(_DEBUG)
+	[[JPFPSStatus sharedInstance] openWithHandler:^(NSInteger fpsValue) {
+		NSLog(@"fpsvalue %@",@(fpsValue));
+	}];
+
+#endif
+
+</pre>
+
+
+
 不需要的时候可以关闭它在状态栏显示
 <pre>
 #if defined(DEBUG)||defined(_DEBUG)
-    [[JPFPSStatus sharedInstance] open];
+    [[JPFPSStatus sharedInstance] close];
 #endif
 </pre>
+
 
 
 JPFPSStatus的显示效果如图：

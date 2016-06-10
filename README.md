@@ -42,7 +42,18 @@ add the code in AppDelegate.m
 
 <pre>
 #if defined(DEBUG)||defined(_DEBUG)
-    [[JPFPSStatus sharedInstance] open];
+	[[JPFPSStatus sharedInstance] openWithHandler:^(NSInteger fpsValue) {
+		NSLog(@"fpsvalue %@",@(fpsValue));
+	}];
+
+#endif
+
+</pre>
+
+
+<pre>
+#if defined(DEBUG)||defined(_DEBUG)
+    [[JPFPSStatus sharedInstance] close];
 #endif
 </pre>
 
