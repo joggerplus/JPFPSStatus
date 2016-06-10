@@ -36,7 +36,6 @@ pod 'JPFPSStatus', '~> 0.1'
 	[[JPFPSStatus sharedInstance] openWithHandler:^(NSInteger fpsValue) {
 		NSLog(@"fpsvalue %@",@(fpsValue));
 	}];
-
 #endif
 
 </pre>
