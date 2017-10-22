@@ -54,6 +54,10 @@
         
         // fpsLabel
         fpsLabel = [[UILabel alloc] initWithFrame:CGRectMake(([[UIScreen mainScreen] bounds].size.width-50)/2+50, 0, 50, 20)];
+        BOOL isiPhoneX = (([[UIScreen mainScreen] bounds].size.width == 375.f && [[UIScreen mainScreen] bounds].size.height == 812.f) || ([[UIScreen mainScreen] bounds].size.height == 375.f && [[UIScreen mainScreen] bounds].size.width == 812.f));
+        if (isiPhoneX) {
+            fpsLabel.frame = CGRectMake(([[UIScreen mainScreen] bounds].size.width-50)/2+50, 24, 50, 20);
+        }
         fpsLabel.font=[UIFont boldSystemFontOfSize:12];
         fpsLabel.textColor=[UIColor colorWithRed:0.33 green:0.84 blue:0.43 alpha:1.00];
         fpsLabel.backgroundColor=[UIColor clearColor];
