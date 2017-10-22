@@ -7,6 +7,29 @@
 //  @ https://github.com/joggerplus/JPFPSStatus
 
 #import "JPFPSStatus.h"
+#import "objc/runtime.h"
+
+static const void *JPFPSCustomTagKey = &JPFPSCustomTagKey;
+@interface UIView (JPFPSCustomTag)
+
+@property(nonatomic) NSInteger customTag;  // default is 0
+
+@end
+
+@implementation UIView (JPFPSCustomTag)
+
+- (void) setCustomTag:(NSInteger)customTag
+{
+    objc_setAssociatedObject(self, JPFPSCustomTagKey, @(customTag), OBJC_ASSOCIATION_RETAIN);
+}
+
+- (NSInteger) customTag
+{
+    NSNumber *cTagNumber = objc_getAssociatedObject(self, JPFPSCustomTagKey);
+    cTagNumber = cTagNumber ? : cTagNumber;
+    return cTagNumber.integerValue;
+}
+@end
 
 @interface JPFPSStatus (){
     CADisplayLink *displayLink;
@@ -62,7 +85,7 @@
         fpsLabel.textColor=[UIColor colorWithRed:0.33 green:0.84 blue:0.43 alpha:1.00];
         fpsLabel.backgroundColor=[UIColor clearColor];
         fpsLabel.textAlignment=NSTextAlignmentRight;
-        fpsLabel.tag=101;
+        fpsLabel.customTag=101;
 
     }
     return self;
@@ -90,13 +113,6 @@
 }
 
 - (void)open {
-    
-    NSArray *rootVCViewSubViews=[[UIApplication sharedApplication].delegate window].rootViewController.view.subviews;
-    for (UIView *label in rootVCViewSubViews) {
-        if ([label isKindOfClass:[UILabel class]]&& label.tag==101) {
-            return;
-        }
-    }
 
     [displayLink setPaused:NO];
     [[((NSObject <UIApplicationDelegate> *)([UIApplication sharedApplication].delegate)) window].rootViewController.view addSubview:fpsLabel];
@@ -113,7 +129,7 @@
 
     NSArray *rootVCViewSubViews=[[UIApplication sharedApplication].delegate window].rootViewController.view.subviews;
     for (UIView *label in rootVCViewSubViews) {
-        if ([label isKindOfClass:[UILabel class]]&& label.tag==101) {
+        if ([label isKindOfClass:[UILabel class]]&& label.customTag==101) {
             [label removeFromSuperview];
             return;
         }
